@@ -19,7 +19,8 @@ export default class App extends React.Component {
     this.state = {
       cur: cur,
       skins: ['#359ea0','#f74341','#152d4d','#20a4ff','#ffb900','#444444','#a17953','#5871c5','#630c7c','#000'],
-      hideSkin: false
+      hideSkin: false,
+      isloadpdf: false
     }
   }
   render() {
@@ -39,7 +40,10 @@ export default class App extends React.Component {
                }
              </div>
           </div>
-          <div className="load icon-xiazai" data-value="下载简历" onClick={this.download}></div>
+          {
+            this.state.isloadpdf
+            && <div className="load icon-xiazai" data-value="下载简历" onClick={this.download.bind(this)}></div>
+          }
         </div>
         <section id="j-container" className="container">
           <aside className="g-conl">
@@ -49,7 +53,7 @@ export default class App extends React.Component {
             <Evalution skin={skin} />
           </aside>
           <article className="g-conr">
-            <div className="online-resume"><a target="_blank" href="https://www.fanweimei.com/zuopin/resume">在线简历：fanweimei.com/zuopin/resume</a></div>
+            <div className="online-resume">在线简历：fanweimei.com/resume</div>
             <Proexp skin={skin} />
             <Workexp skin={skin} />
             <Education skin={skin} />
@@ -57,6 +61,37 @@ export default class App extends React.Component {
         </section>
       </div>
     );
+  }
+  componentDidMount(){
+    //预先生产简历文档
+    this.buildPDF();
+  }
+  buildPDF(){
+    let container = document.getElementById('j-container');
+    let width = container.offsetWidth; //获取dom 宽度
+    let height = container.offsetHeight; //获取dom 高度
+    let canvas = document.createElement("canvas"); //创建一个canvas节点
+    let scale = 2; //定义任意放大倍数 支持小数
+    canvas.width = width * scale; //定义canvas 宽度 * 缩放
+    canvas.height = height * scale; //定义canvas高度 *缩放
+    canvas.getContext("2d").scale(scale,scale); //获取context,设置scale
+    let opts = {
+        background: '#fff',
+        scale:scale, // 添加的scale 参数
+        canvas:canvas, //自定义 canvas
+        logging: true, //日志开关
+        width:width, //dom 原始宽度
+        height:height //dom 原始高度
+    };
+    html2canvas(container, opts).then(function (canvas) {
+      let dataUrl = canvas.toDataURL('image/jpeg',1.0);
+      this.pdf = new jsPDF('', 'pt', 'a4');
+      //addImage后两个参数控制添加图片的尺寸，此处将页面高度按照a4纸宽高比列进行压缩
+      this.pdf.addImage(dataUrl, 'JPEG', 0, 0, 595.28, 592.28/canvas.width * canvas.height );
+      this.setState({
+        isloadpdf: true
+      })
+    }.bind(this));
   }
   changeSkin(index){
     this.setState({
@@ -68,7 +103,6 @@ export default class App extends React.Component {
   }
   hideSkinList(){
     let hideSkin = !this.state.hideSkin;
-    console.log(hideSkin)
     this.setState({
       hideSkin: hideSkin
     });
@@ -92,30 +126,6 @@ export default class App extends React.Component {
     }
   }
   download(){
-    let container = $('#j-container');
-    let width = container.offsetWidth; //获取dom 宽度
-    let height = container.offsetHeight; //获取dom 高度
-    let canvas = document.createElement("canvas"); //创建一个canvas节点
-    let scale = 2; //定义任意放大倍数 支持小数
-    canvas.width = width * scale; //定义canvas 宽度 * 缩放
-    canvas.height = height * scale; //定义canvas高度 *缩放
-    canvas.getContext("2d").scale(scale,scale); //获取context,设置scale
-    let opts = {
-        background: '#fff',
-        scale:scale, // 添加的scale 参数
-        canvas:canvas, //自定义 canvas
-        logging: true, //日志开关
-        width:width, //dom 原始宽度
-        height:height //dom 原始高度
-    };
-
-    html2canvas(container, opts).then(function (canvas) {
-        let dataUrl = canvas.toDataURL('image/jpeg',1.0);
-        let pdf = new jsPDF('', 'pt', 'a4');
-        //addImage后两个参数控制添加图片的尺寸，此处将页面高度按照a4纸宽高比列进行压缩
-        pdf.addImage(dataUrl, 'JPEG', 0, 0, 595.28, 592.28/canvas.width * canvas.height );
-
-        pdf.save('resume.pdf');
-    });
+    this.pdf.save('范伟梅-web前端开发.pdf');
   }
 }

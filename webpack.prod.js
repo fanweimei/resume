@@ -30,8 +30,7 @@ module.exports = Merge(CommonConfig, {
               options: {
                 plugins() {
                   return [
-                    autoprefixer,
-                    pxtorem({ rootValue: 75, propWhiteList: [], minPixelValue: 1 })
+                    autoprefixer
                   ];
                 }
               }
@@ -49,8 +48,7 @@ module.exports = Merge(CommonConfig, {
               options: {
                 plugins() {
                   return [
-                    autoprefixer,
-                    pxtorem({ rootValue: 75, propWhiteList: [], minPixelValue: 1 })
+                    autoprefixer
                   ];
                 }
               }
@@ -60,6 +58,11 @@ module.exports = Merge(CommonConfig, {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({ // 编译成生产版本
+       'process.env': {
+         NODE_ENV: JSON.stringify('production'),
+       },
+     }),
     new webpack.optimize.UglifyJsPlugin({
       output: {
         comments: false,
