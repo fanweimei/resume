@@ -1,0 +1,35 @@
+@import "../../../style/global.less";
+
+.g-workexp {
+  margin-bottom: 32px;
+  .workexp-title {
+    width: 350px;
+  }
+  .company-name {
+    .font(19px);
+    height: 36px;
+  }
+  .company-intro {
+    .font(14px, normal, #999);
+    line-height: 24px;
+    i {
+      margin: 0 10px;
+      color: #333;
+    }
+  }
+  .work-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 40px;
+    .font(16px, normal, @skin);
+  }
+  .work-desc {
+    .para();
+  }
+  .work-list {
+    li {
+      margin-bottom: 10px;
+    }
+  }
+}

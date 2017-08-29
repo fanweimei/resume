@@ -1,0 +1,33 @@
+@import "../../../style/global.less";
+
+.g-edu {
+  .edu-title {
+    width: 350px;
+  }
+  .edu-con {
+    li {
+      margin-bottom: 12px;
+    }
+  }
+  .edu-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    .font(18px, normal, @skin);
+    .edu-time {
+      font-size: 16px;
+    }
+  }
+  .edu-degree {
+    .font(16px, normal, #333);
+    line-height: 26px;
+    margin-bottom: 3px;
+    span {
+      margin-right: 10px;
+    }
+  }
+  .edu-score {
+    .font(14px, normal, #666);
+  }
+}

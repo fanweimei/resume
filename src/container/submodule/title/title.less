@@ -1,0 +1,17 @@
+@import "../../../style/global.less";
+.g-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  .line {
+    box-sizing: border-box;
+    .size(60px, 3px);
+    border-bottom: 3px dashed #666;
+  }
+  span:nth-child(2) {
+    .font(20px, bold, #333);
+  }
+}
