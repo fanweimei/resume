@@ -14,7 +14,7 @@ export default class Workexp extends React.Component {
           list: [
             {
               time: '2017.07-2017.08',
-              label: ['JavaScript','React','Webpack'],
+              label: ['JavaScript','React','redux','Webpack'],
               text: '参与培训助手5.7版本的h5页面的开发，主要完成课程大厅列表、搜索、个人中心的开发。以及部分代码优化重构的工作，包括css兼容性问题的优化，基于react-redux的技术方案重构现有redux架构的项目。'
             },
             {

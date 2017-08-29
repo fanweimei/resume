@@ -9,7 +9,7 @@ export default class Proexp extends React.Component {
       data: [
         {
           title: '培训助手',
-          label: ['H5','React','webpack'],
+          label: ['Web端','App','微信公众号'],
           text: '是一款为企业员工提供在线培训、学习和交流的平台，具有web端、移动APP、微信公众号等多个应用场景。我主要负责课程大厅、课程详情等相关组件的开发。'
         },
         {
