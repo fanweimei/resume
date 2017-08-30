@@ -9,7 +9,7 @@ module.exports = Merge(CommonConfig, {
   entry: {
     index: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:3000',
+      'webpack-dev-server/client?http://localhost:3001',
       'webpack/hot/only-dev-server',
       './src/index.js'
     ],
@@ -50,7 +50,7 @@ module.exports = Merge(CommonConfig, {
     // 在package.json中加入--hot，开启热更新，可以不用在devServer配置hot，也不用在这里引入插件，这一切会自动完成
   ],
   devServer: {
-    port: 3000,
+    port: 3001,
     historyApiFallback: true //不存在的路径，默认打开根目录下的index.html
     // historyApiFallback: {
     //   index: '/assets/'  //与output中publicPath路径一致

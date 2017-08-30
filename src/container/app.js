@@ -1,3 +1,4 @@
+import pubsub from '~/lib/pubsub';
 import Profile from './submodule/profile';
 import Perinfo from './submodule/perinfo';
 import Skill from './submodule/skill'
@@ -19,7 +20,8 @@ export default class App extends React.Component {
     this.state = {
       cur: cur,
       skins: ['#359ea0','#f74341','#152d4d','#20a4ff','#ffb900','#444444','#a17953','#5871c5','#630c7c','#000'],
-      hideSkin: false
+      hideSkin: false,
+      isloadpdf: false
     }
   }
   render() {
@@ -29,7 +31,7 @@ export default class App extends React.Component {
     return (
       <div className="g-page">
         <div className="g-tool" onMouseOver={this.toggleTooltip.bind(this,true)} onMouseOut={this.toggleTooltip.bind(this,false)}>
-          <div className="skin">
+          <div className="tool-item skin">
              <i className="icon-skin" data-value="更换主题" onClick={this.hideSkinList.bind(this)} style={{color: skin}}></i>
              <div className={`skin-list ${hideSkin?'hide':''}`}>
                {
@@ -39,7 +41,11 @@ export default class App extends React.Component {
                }
              </div>
           </div>
-          <div className="load icon-xiazai" data-value="下载简历" onClick={this.download}></div>
+          <a className="tool-item icon-code" target="_blank" href="https://github.com/fanweimei/resume.git" data-value="查看源码" style={{color: skin}}></a>
+          {
+            this.state.isloadpdf
+            && <div className="tool-item icon-xiazai" data-value="下载简历" onClick={this.download.bind(this)} style={{color: skin}}></div>
+          }
         </div>
         <section id="j-container" className="container">
           <aside className="g-conl">
@@ -49,7 +55,7 @@ export default class App extends React.Component {
             <Evalution skin={skin} />
           </aside>
           <article className="g-conr">
-            <div className="online-resume"><a target="_blank" href="https://www.fanweimei.com/zuopin/resume">在线简历：fanweimei.com/zuopin/resume</a></div>
+            <div className="online-resume">在线简历：fanweimei.com/resume</div>
             <Proexp skin={skin} />
             <Workexp skin={skin} />
             <Education skin={skin} />
@@ -58,40 +64,13 @@ export default class App extends React.Component {
       </div>
     );
   }
-  changeSkin(index){
-    this.setState({
-      cur: index
-    });
-    if(window.localStorage){
-      localStorage.setItem('skinIndex',index);
-    }
+  componentDidMount(){
+    //技能图渲染完后，预先生产简历文档
+    setTimeout(() => {
+      this.buildPDF();
+    },2000);
   }
-  hideSkinList(){
-    let hideSkin = !this.state.hideSkin;
-    console.log(hideSkin)
-    this.setState({
-      hideSkin: hideSkin
-    });
-  }
-  toggleTooltip(flag,e){
-    if($(e.target).attr('class').indexOf('icon')==-1){
-      return;
-    }
-    if(flag){
-      if(!this.tooltip){
-        this.tooltip = $('<div>hello</div');
-        $('body').append(this.tooltip);
-      }
-      this.tooltip.addClass('tooltip').html($(e.target).attr('data-value'));
-      this.tooltip.css({
-        top: $(e.target).offset().top+10+'px'
-      }).show();
-    }
-    else {
-      this.tooltip && this.tooltip.hide();
-    }
-  }
-  download(){
+  buildPDF(){
     let container = document.getElementById('j-container');
     let width = container.offsetWidth; //获取dom 宽度
     let height = container.offsetHeight; //获取dom 高度
@@ -108,14 +87,51 @@ export default class App extends React.Component {
         width:width, //dom 原始宽度
         height:height //dom 原始高度
     };
-
     html2canvas(container, opts).then(function (canvas) {
-        let dataUrl = canvas.toDataURL('image/jpeg',1.0);
-        let pdf = new jsPDF('', 'pt', 'a4');
-        //addImage后两个参数控制添加图片的尺寸，此处将页面高度按照a4纸宽高比列进行压缩
-        pdf.addImage(dataUrl, 'JPEG', 0, 0, 595.28, 592.28/canvas.width * canvas.height );
-
-        pdf.save('resume.pdf');
+      let dataUrl = canvas.toDataURL('image/jpeg',1.0);
+      this.pdf = new jsPDF('', 'pt', 'a4');
+      //addImage后两个参数控制添加图片的尺寸，此处将页面高度按照a4纸宽高比列进行压缩
+      this.pdf.addImage(dataUrl, 'JPEG', 0, 0, 595.28, 592.28/canvas.width * canvas.height );
+      this.setState({
+        isloadpdf: true
+      })
+    }.bind(this));
+  }
+  changeSkin(index){
+    this.setState({
+      cur: index
     });
+    if(window.localStorage){
+      localStorage.setItem('skinIndex',index);
+    }
+  }
+  hideSkinList(){
+    let hideSkin = !this.state.hideSkin;
+    this.setState({
+      hideSkin: hideSkin
+    });
+  }
+  toggleTooltip(flag,e){
+    let skin = this.state.skins[this.state.cur];
+    if($(e.target).attr('class').indexOf('icon')==-1){
+      return;
+    }
+    if(flag){
+      if(!this.tooltip){
+        this.tooltip = $('<div>hello</div');
+        $('body').append(this.tooltip);
+      }
+      this.tooltip.addClass('tooltip').html($(e.target).attr('data-value'));
+      this.tooltip.css({
+        top: $(e.target).offset().top+10+'px',
+        color: skin
+      }).show();
+    }
+    else {
+      this.tooltip && this.tooltip.hide();
+    }
+  }
+  download(){
+    this.pdf.save('范伟梅-web前端开发.pdf');
   }
 }
