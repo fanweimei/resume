@@ -92,7 +92,7 @@ export default class App extends React.Component {
     }
   }
   download(){
-    let container = $('#j-container');
+    let container = document.getElementById('j-container');
     let width = container.offsetWidth; //获取dom 宽度
     let height = container.offsetHeight; //获取dom 高度
     let canvas = document.createElement("canvas"); //创建一个canvas节点
