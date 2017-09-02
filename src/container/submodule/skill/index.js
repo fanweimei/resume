@@ -20,6 +20,10 @@ export default class Skill extends React.Component{
           value: 90
         },
         {
+          name: 'Jquery',
+          value: 90
+        },
+        {
           name: 'less',
           value: 80
         },
@@ -42,6 +46,10 @@ export default class Skill extends React.Component{
         {
           name: 'd3.js',
           value: 40
+        },
+        {
+          name: 'Java',
+          value: 50
         },
         {
           name: 'git/svn',

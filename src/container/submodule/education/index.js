@@ -15,7 +15,7 @@ export default class Education extends React.Component {
         },
         {
           name: '北京林业大学',
-          time: '2010.09-2010.07',
+          time: '2010.09-2014.07',
           profession: '食品科学与工程',
           degree: '学士',
           score: '10%左右'

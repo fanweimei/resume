@@ -49,7 +49,7 @@ export default class Proexp extends React.Component {
               return (
                 <li key={index}>
                   <div className="pro-intro">
-                    <h3 style={{color: skin}}><a href={`${item.link?item.link:'javascript:'}`} target={`${item.link?'_blank':'_self'}`}>{item.title}</a></h3>
+                    <h3><a href={`${item.link?item.link:'javascript:'}`} target={`${item.link?'_blank':'_self'}`} style={{color: skin}}>{item.title}</a></h3>
                     {
                       item.label
                       && <div className="label">

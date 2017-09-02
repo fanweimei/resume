@@ -37,7 +37,7 @@ export default class Workexp extends React.Component {
             this.state.data.map((item,index) => {
               return (
                 <li key={`i-${index}`}>
-                  <h3 className="company-name">{item.name}</h3>
+                  <h3 className="company-name" style={{color: skin}}>{item.name}</h3>
                   <div className="company-intro">行业类别：{item.category}<i>|</i>企业性质：{item.property}<i>|</i>规模：{item.scale}</div>
                   <ul className="work-list">
                     {
