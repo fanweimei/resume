@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      .layout {
+        background: red;
+        /*overflow: auto;*/
+      }
+      .left {
+        float: left;
+        height: 100px;
+        background: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- BFC子元素即使是float也会参与高度计算 -->
+    <section class="layout">
+      <div class="left">我是浮动元素</div>
+    </section>
+  </body>
+</html>

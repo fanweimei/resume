@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      html * {
+        margin: 0;
+        padding: 0;
+      }
+      .wrapper {
+        background: red;
+        margin-bottom: 20px;
+      }
+      .box {
+        height: 100px;
+        margin-top: 10px;
+        background: yellow;
+      }
+      .clear {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="wrapper">
+      <div class="box"></div>
+    </section>
+    <!-- 父级加了overflow:hidden之后，就产生了BFC，解决了边距重叠问题 -->
+    <section class="wrapper clear">
+      <div class="box"></div>
+    </section>
+  </body>
+</html>

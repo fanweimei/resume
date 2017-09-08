@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      #box2 {
+        width: 200px;
+        height: 200px;
+        background: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box1" style="width:200px; height:200px; background:red">box1</div>
+    <div id="box2"></div>
+    <button id="bt">改变宽高</button>
+    <script type="text/javascript">
+      var box1 = document.getElementById('box1');
+      var box2 = document.getElementById('box2');
+      var btn = document.getElementById('bt');
+      console.log(box1.style.width, box1.style.height); //200px 200px
+      console.log(box2.style.height, box2.style.height);
+      btn.onclick = function () {
+        /*
+          可以通过dom.style[attr] = attrValue 来改变某个样式值
+         */
+        box1.style.width = '400px'; //box1和box2的宽高都变为了400px
+        box2.style.width = '400px';
+        box1.style.background = 'yellow';
+        box2.style.background = 'blue';
+        box1.style.fontSize = '30px';
+        setTimeout(function(){
+          console.log(box2.style.height, box2.style.height);
+        },1000)
+      }
+    </script>
+  </body>
+</html>

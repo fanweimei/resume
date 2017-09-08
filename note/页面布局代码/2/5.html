@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      html, body {
+        width: 100%;
+        height: 100%;
+      }
+      html, body, div {
+        margin: 0;
+        padding: 0;
+      }
+      .g-wrapper {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 300px auto 300px;
+      }
+      .left, .right {
+        background: green;
+      }
+      .center {
+        background: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="g-wrapper">
+      <div class="left">
+        123 <br />
+      </div>
+      <div class="center">
+        123 <br />
+        123 <br />
+        123 <br />
+        123 <br />
+        123 <br />
+        123 <br />
+      </div>
+      <div class="right">
+        123 <br />
+      </div>
+    </div>
+  </body>
+</html>
