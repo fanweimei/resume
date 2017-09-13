@@ -1,0 +1,220 @@
+@import "../../../style/global.less";
+
+// 头像
+.g-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 26px;
+  dt {
+    .square-size(120px);
+    margin-bottom: 16px;
+    overflow: hidden;
+    border-radius: 60px;
+    background: #ccc;
+    img {
+      width: 100%;
+    }
+  }
+  .name {
+    .size(72px, 26px);
+    padding-bottom: 6px;
+    background: url(../../../assets/img/name2.png) no-repeat;
+    background-size: contain;
+  }
+  .job {
+    .font(18px);
+    color: @skin;
+  }
+}
+
+// 标题
+.g-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  .line {
+    box-sizing: border-box;
+    .size(60px, 3px);
+    border-bottom: 3px dashed #666;
+  }
+  span:nth-child(2) {
+    .font(20px, bold, #333);
+  }
+}
+
+// 个人信息
+.g-perinfo {
+  margin-bottom: 10px;
+  .perinfo-con {
+    width: 100%;
+    .clearfix();
+    li {
+      float: left;
+      min-width: 50%;
+      height: 42px;
+      color: #666;
+    }
+  }
+}
+
+// 技能描述
+.g-skill {
+  margin-bottom: 16px;
+  .skill-title {
+    margin-bottom: 22px;
+  }
+  .skill-con {
+    .clearfix();
+    li {
+      float: left;
+      width: 33%;
+      text-align: center;
+      margin-bottom: 20px;
+      .skill-name {
+        height: 34px;
+        .font(16px, normal, #666);
+      }
+      .skill-ring {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+// 自我评价
+.g-ev {
+  margin-bottom: 20px;
+  .ev-title {
+    margin-bottom: 22px;
+  }
+  .ev-con {
+    .font(16px);
+    .icon-zhizhuo {
+      .icon('\e601');
+    }
+    .icon-zeren {
+      .icon('\e602');
+    }
+    .icon-jingshen {
+      .icon('\e603');
+    }
+    .icon-kuaile {
+      .icon('\e604', @skin, 20px);
+    }
+    .icon-jingyan {
+      .icon('\e605', @skin, 20px);
+    }
+    li {
+      .font(15px);
+      height: 30px;
+      color: #666;
+      span {
+        margin-right: 8px;
+      }
+    }
+    p {
+      padding-top: 10px;
+      color: #333;
+      line-height: 26px;
+      text-indent: 2em;
+    }
+  }
+}
+
+// 项目经验
+.g-proexp {
+  margin-bottom: 32px;
+  .proexp-title {
+    width: 350px;
+  }
+  li {
+    margin-bottom: 12px;
+  }
+  .pro-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 38px;
+    h3 {
+      .font(19px);
+    }
+  }
+  .pro-desc {
+    .para();
+  }
+}
+
+// 工作经验
+.g-workexp {
+  margin-bottom: 32px;
+  .workexp-title {
+    width: 350px;
+  }
+  .company-name {
+    .font(19px);
+    height: 36px;
+  }
+  .company-intro {
+    .font(14px, normal, #999);
+    line-height: 24px;
+    i {
+      margin: 0 10px;
+      color: #333;
+    }
+  }
+  .work-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 40px;
+    .font(16px, normal, @skin);
+  }
+  .work-desc {
+    .para();
+  }
+  .work-list {
+    li {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+//教育背景
+.g-edu {
+  .edu-title {
+    width: 350px;
+  }
+  .edu-con {
+    li {
+      margin-bottom: 12px;
+    }
+  }
+  .edu-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    .font(18px, normal, @skin);
+    .edu-time {
+      font-size: 16px;
+    }
+  }
+  .edu-degree {
+    .font(16px, normal, #333);
+    line-height: 26px;
+    margin-bottom: 3px;
+    span {
+      margin-right: 10px;
+    }
+  }
+  .edu-score {
+    .font(14px, normal, #666);
+  }
+}

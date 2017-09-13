@@ -1,5 +1,5 @@
 import { AppContainer } from 'react-hot-loader';
-import App from '~/container/app';
+import App from '~/page/temp1/app';
 
 const render = Component => {
   ReactDOM.render(
@@ -13,7 +13,7 @@ const render = Component => {
 render(App);
 
 if (module.hot) {
-  module.hot.accept('~/container/app', () => {
+  module.hot.accept('~/page/temp1/app', () => {
     render(App);
   })
 }

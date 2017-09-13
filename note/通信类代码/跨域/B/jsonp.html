@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>通过jsonp实现跨域请求数据</title>
+  </head>
+  <body>
+    <script src="../util.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      util.jsonp({
+        url: 'http://127.0.0.1:9000/',
+        onsuccess: function(data){
+          //console.log(data);
+          console.log(data);
+        },
+        onerror: function(){
+          console.log('nothing');
+        }
+      })
+    </script>
+  </body>
+</html>

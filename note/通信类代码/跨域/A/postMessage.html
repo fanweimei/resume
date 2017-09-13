@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>通过postMessage实现跨域发送数据</title>
+  </head>
+  <body>
+    <iframe id="ifr" src="https://www.fanweimei.com/ky/postMessage.html" style="display: none;"></iframe>
+    <script type="text/javascript">
+      window.onload = function(){
+        var ifr = document.getElementById('ifr');
+        var ifrWindow = ifr.contentWindow;
+        var data = {
+          name: 'fanfan',
+          age: 3
+        }
+        ifrWindow.postMessage(JSON.stringify(data), 'https://www.fanweimei.com/ky/postMessage.html')
+      }
+    </script>
+  </body>
+</html>
